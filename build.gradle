@@ -6,11 +6,11 @@ plugins {
     id 'io.github.goooler.shadow' version '8.1.8'
 }
 
-version = mod_version
+version = project.hasProperty('modVersion') ? project.modVersion : mod_version
 group = mod_group_id
 
 base {
-    archivesName = mod_id
+    archivesName = "${mod_id}-MC${minecraft_version}"
 }
 
 // Mojang ships Java 21 to end users in 1.20.5+, so your mod should target Java 21.
@@ -193,7 +193,8 @@ tasks.named('processResources', ProcessResources).configure {
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
-tasks.named('jar', Jar).configure {
+jar {
+    archiveBaseName.set("${mod_id}-MC${minecraft_version}")
     manifest {
         attributes([
             'Specification-Title'     : mod_id,
@@ -240,9 +241,9 @@ sourceSets.each {
 
 // Output to build/libs/shadow.jar
 shadowJar {
-    archiveBaseName.set(mod_id)
-    archiveClassifier.set('shadow')
-    archiveVersion.set(mod_version)
+    archiveBaseName.set("${mod_id}-MC${minecraft_version}")
+    archiveClassifier.set('')
+    archiveVersion.set(project.version)
     dependencies {
         include(dependency("dev.koifysh:archipelago-client"))
         include(dependency("org.java-websocket:Java-WebSocket"))

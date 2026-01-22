@@ -10,11 +10,11 @@ version = project.hasProperty('modVersion') ? project.modVersion : mod_version
 group = mod_group_id
 
 base {
-    archivesName = "${mod_id}-MC${minecraft_version}-${forge_version}"
+    archivesName = "${mod_id}-MC${java_version}-${minecraft_version}-${forge_version}"
 }
 
 // Mojang ships Java 21 to end users in 1.20.5+, so your mod should target Java 21.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(java_version)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
@@ -241,7 +241,7 @@ sourceSets.each {
 
 // Output to build/libs/shadow.jar
 shadowJar {
-    archiveBaseName.set("${mod_id}-MC${minecraft_version}-${forge_version}")
+    archiveBaseName.set("${mod_id}-MC${java_version}-${minecraft_version}-${forge_version}")
     archiveClassifier.set('')
     archiveVersion.set(project.version)
     dependencies {

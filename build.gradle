@@ -241,7 +241,7 @@ sourceSets.each {
 
 // Output to build/libs/shadow.jar
 shadowJar {
-    archiveBaseName.set("${mod_id}-MC${minecraft_version}")
+    archiveBaseName.set("${mod_id}-MC${minecraft_version}-${forge_version}")
     archiveClassifier.set('')
     archiveVersion.set(project.version)
     dependencies {

@@ -148,6 +148,8 @@ class MinecraftWorld(World):
             "death_link": bool(self.options.death_link.value),
             "starting_items": json.dumps(self.options.starting_items.value),
             "race": self.multiworld.is_race,
+            # GitHub Actions Release
+            "git_tag": os.environ.get("GITHUB_REF_NAME", ""),
         }
 
         # ---- Server info commented out ----
